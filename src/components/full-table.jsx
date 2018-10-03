@@ -151,7 +151,7 @@ class Table extends Component {
     }
     if (hugeHeadList.length > 0) {
       hugeHeadList.unshift("IP");
-  
+
       this.setState({
         rowList: hugearr,
         headList: hugeHeadList,

@@ -16,7 +16,8 @@
     "socket.io-redis": "^5.2.0"
   },
   "scripts": {
-    "start": "react-scripts start",
+    "start-react": "react-scripts start",
+    "start-server": "node server.js",
     "build": "react-scripts build",
     "server-dev": "nodemon server.js",
     "eject": "react-scripts eject"

@@ -1,0 +1,14 @@
+version: '3.3'
+services:
+  react:
+    build:
+      context: .
+      dockerfile: Dockerfile.react
+    ports:
+      - 3000:3000
+  server:
+    build:
+      context: .
+      dockerfile: Dockerfile.server
+    ports:
+      - 5001:5001
