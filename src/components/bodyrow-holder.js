@@ -24,13 +24,13 @@ class TableRowHolder extends Component {
     }
     
     render() {
-        if (this.state.rowList === [] ) {
+        if (this.state.rowList.length === 0 ) {
             return null;
         } else {
             return (
                 this.state.rowList.map((item, i) => (
-                    <tr key={i} className="1">
-                        <TableRow key={i} headList={this.state.headList} NOTdisplayed={this.state.NOTdisplayed} rowList={item} APIList={this.state.APIList}/>
+                    <tr key={`${i}_${item[0]}`} className="1">
+                        <TableRow headList={this.state.headList} NOTdisplayed={this.state.NOTdisplayed} rowList={item} APIList={this.state.APIList}/>
                     </tr>
                 ))
             )

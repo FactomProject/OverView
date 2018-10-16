@@ -30,7 +30,7 @@ class TableNames extends Component {
         (className, j) =>
           className === "IP" && i === 0 ? (
             <th
-              key={j.toString()}
+              key={`${className}_${j}`}
               className={className}
               style={{ textAlign: "center" }}
             >
@@ -40,7 +40,7 @@ class TableNames extends Component {
             </th>
           ) : className.split("--")[1] === item.split("/")[0] ? (
             <th
-              key={j.toString()}
+              key={`${className}_${j}`}
               className={className}
               style={{ textAlign: "center" }}
             >
