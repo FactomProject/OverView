@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import '../App.css';
 import _ from "underscore";
+import PropTypes from 'prop-types';
 
 class TableRow extends Component {
     constructor(props) {
@@ -16,20 +17,11 @@ class TableRow extends Component {
     }
 
     componentWillReceiveProps(nextProps) {
-        console.log(nextProps)
         this.setState({
             changed: false
         })
         // console.log(nextProps.rowList, this.state.rowList)
         if (!_.isEqual(nextProps.rowList, this.state.rowList) && nextProps.rowList.length >= 1) {
-            // if (nextProps.rowList[0] === "35.201.150.168:8088--URL") {
-            //     console.log("OLD ", this.state.rowList)
-            //     console.log("NEW ", nextProps.rowList)
-            // }
-            if (this.state.rowList[6] != undefined) {
-                console.log(this.state.rowList[6].split('--')[0])
-                console.log(new Date(this.state.rowList[6].split('--')[0] / 1000 / 1000))
-            }
         
             this.setState({
                 headList: nextProps.headList,
@@ -68,3 +60,11 @@ class TableRow extends Component {
 
 
 export default TableRow
+
+TableRow.propTypes = {
+    headList: PropTypes.array,
+    rowList: PropTypes.array,
+    NOTdisplayed: PropTypes.array,
+    APIList: PropTypes.array,
+    changed: PropTypes.bool
+}

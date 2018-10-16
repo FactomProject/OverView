@@ -1,8 +1,9 @@
 import React, { Component } from 'react';
 import '../App.css';
 import TableRow from './table-row';
+import PropTypes from 'prop-types'
 
-class Table extends Component {
+class TableRowHolder extends Component {
     constructor(props) {
       super(props);
       this.state = {
@@ -38,4 +39,11 @@ class Table extends Component {
 }
 
 
-export default Table
+export default TableRowHolder;
+
+TableRowHolder.propTypes = {
+    rowList: PropTypes.array,
+    headList: PropTypes.array,
+    NOTdisplayed: PropTypes.array,
+    APIList: PropTypes.array
+}

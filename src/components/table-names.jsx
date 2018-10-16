@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import "../App.css";
-import $ from "jquery";
+import PropTypes from 'prop-types';
 
 class TableNames extends Component {
   constructor(props) {
@@ -58,3 +58,10 @@ class TableNames extends Component {
 }
 
 export default TableNames;
+
+TableNames.propTypes = {
+  headList: PropTypes.array,
+  NOTdisplayed: PropTypes.array,
+  APIList: PropTypes.array,
+  count: PropTypes.number
+}

@@ -1,8 +1,9 @@
 import React, { Component } from 'react';
 import '../App.css';
 import TableNames from './table-names'
+import PropTypes from 'prop-types';
 
-class Table extends Component {
+class TableNamesHolder extends Component {
     constructor(props) {
       super(props);
       this.state = {
@@ -34,4 +35,10 @@ class Table extends Component {
 }
 
 
-export default Table
+export default TableNamesHolder;
+
+TableNamesHolder.propTypes = {
+    headList: PropTypes.array,
+    NOTdisplayed: PropTypes.array,
+    APIList: PropTypes.array
+}

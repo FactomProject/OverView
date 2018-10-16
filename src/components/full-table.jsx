@@ -5,7 +5,7 @@ import BodyRowHolder from "./bodyrow-holder";
 import Menu from "./menu";
 import io from "socket.io-client";
 import $ from "jquery";
-import _ from "underscore";
+import PropTypes from 'prop-types';
 
 class Table extends Component {
   constructor(props) {
@@ -69,7 +69,7 @@ class Table extends Component {
 
       for (let url in newer_Obj) {
         ObjToUse[url] = {};
-        if (Object.keys(that.state.OLDData).length != 0) {
+        if (Object.keys(that.state.OLDData).length !== 0) {
           // console.log(`NEW, ${url} `,newer_Obj[url]['current-minute'])
           // console.log(`OLD, ${url} `,that.state.OLDData[url]['current-minute'])
         }
@@ -90,25 +90,11 @@ class Table extends Component {
           that.getConfigApiInfo(ObjToUse, APIList);
         }, 1000)
       } else {
-        if (Object.keys(ObjToUse).length === 0 ) {
-          null
-        } else {
+        if (Object.keys(ObjToUse).length !== 0 ) {
           that.setState({
             OLDData: newer_Obj
           })
           that.getConfigApiInfo(ObjToUse, APIList);
-        }
-  
-        function objHasUndefined() {
-          let count = false;
-          for (let key in ObjToUse) {
-            for (let key2 in ObjToUse[key]) {
-              if (ObjToUse[key][key2] === undefined) {
-                count = true;
-              }
-            }
-          }
-          return count;
         }
       }
     }, 200);
@@ -188,17 +174,6 @@ class Table extends Component {
           }
         }
       }
-      // console.log(hugearr, hugeHeadList)
-      // console.log(APIList.APIList.length, objcheckFunc())
-    }
-    function objcheckFunc() {
-      count = 0;
-      for (let key in newObj) {
-        if (newObj[key].length > 0) {
-          count++;
-        }
-      }
-      return count;
     }
     
     if (hugeHeadList.length > 0 ) {
@@ -553,3 +528,21 @@ class Table extends Component {
 }
 
 export default Table;
+
+Table.propTypes = {
+  headList: PropTypes.array,
+  displayed: PropTypes.array,
+  displayedAPIs: PropTypes.array,
+  NOTdisplayedAPIs: PropTypes.array,
+  NOTdisplayed: PropTypes.array,
+  rowList: PropTypes.array,
+  showMenu: PropTypes.bool,
+  showMenu2: PropTypes.object,
+  fullObj: PropTypes.object,
+  menus: PropTypes.array,
+  APIToggle: PropTypes.object,
+  APIList: PropTypes.array,
+  apiObjectforMenu: PropTypes.object,
+  first: PropTypes.bool,
+  OLDData: PropTypes.object
+}

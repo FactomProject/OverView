@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import "../App.css";
 import $ from "jquery";
+import PropTypes from 'prop-types';
 
 class Menu extends Component {
   constructor(props) {
@@ -11,7 +12,7 @@ class Menu extends Component {
       headList: [],
       showMenu: false,
       showMenu2: {},
-      fullObj: {},
+      fullObj: [],
       menus: [],
       propbablyshouldUseThis: {}
     };
@@ -126,3 +127,14 @@ class Menu extends Component {
 }
 
 export default Menu;
+
+Menu.propTypes = {
+  NOTdisplayed: PropTypes.array,
+  displayed: PropTypes.array,
+  headList: PropTypes.array,
+  showMenu: PropTypes.bool,
+  showMenu2: PropTypes.object,
+  fullObj: PropTypes.array,
+  menus: PropTypes.array,
+  propbablyshouldUseThis: PropTypes.object
+}

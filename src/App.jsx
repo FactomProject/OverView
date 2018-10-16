@@ -2,6 +2,7 @@ import React from "react";
 import logo from "./logo.svg";
 import "./App.css";
 import Table from "./components/full-table";
+import PropTypes from 'prop-types';
 class App extends React.Component {
   constructor(props) {
     super(props);
@@ -46,3 +47,8 @@ class App extends React.Component {
   }
 }
 export default App;
+
+App.propTypes = {
+  displayed: PropTypes.array,
+  colVals: PropTypes.array
+}
