@@ -205,6 +205,7 @@ class Table extends Component {
           that.state.NOTdisplayed.push(that.state.headList[i]);
         }
         $(`.${that.state.headList[i]}`).hide();
+        // document.querySelector(`.${that.state.headList[i]}`).style.visibility = "hidden";
       }
     }
   }
@@ -232,6 +233,8 @@ class Table extends Component {
         }
 
         $(`.${data}`).hide("slow");
+        // document.querySelector(`.${data}`).style.visibility = "hidden";
+
 
         this.state.NOTdisplayed.push(data);
       } else if (this.state.NOTdisplayed.includes(data)) {
@@ -241,6 +244,7 @@ class Table extends Component {
         }
 
         $(`.${data}`).show("slow");
+        // document.querySelector(`.${data}`).style.visibility = "visible";
 
         this.state.displayed.push(data);
       }
@@ -265,6 +269,8 @@ class Table extends Component {
           }
 
           $(`.${data}`).hide("slow");
+          // document.querySelector(`.${data}`).style.visibility = "hidden";
+
 
           this.state.NOTdisplayed.push(data);
         }
@@ -283,6 +289,7 @@ class Table extends Component {
           }
 
           $(`.${data}`).show("slow");
+          // document.querySelector(`.${data}`).style.visibility = "visible";
 
           this.state.displayed.push(data);
         }
