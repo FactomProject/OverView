@@ -18,7 +18,7 @@
 }
 /* resets */
 
-body {
+/* body {
   background-color: #202020;
   font-size: 16px;
   margin: 0;
@@ -48,8 +48,8 @@ h1 small {
   color: #939598;
   font-size: 16px;
   text-transform: none;
-}
-table {
+} */
+/* table {
   margin-top: 5vh;
   margin-left: 5em;
   margin-right: 5em;
@@ -90,7 +90,7 @@ table tfoot td {
   font-size: 14px;
   font-weight: normal;
   text-transform: uppercase;
-}
+} */
 /* table tr td:first-child, table tr th:first-child { padding-left: 1.5rem; width: 100%; } */
 .nav {
   /* margin-top: 5vh; */
