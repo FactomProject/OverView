@@ -1,16 +1,18 @@
 import React, { Component } from 'react';
 import '../App.css';
 import TableRow from './table-row';
+import $ from "jquery";
+
 
 class Table extends Component {
     constructor(props) {
-      super(props);
-      this.state = {
-        rowList: [],
-        headList: [],
-        NOTdisplayed: [],
-        APIList: []
-      }
+        super(props);
+        this.state = {
+            rowList: [],
+            headList: [],
+            NOTdisplayed: [],
+            APIList: []
+        }
     }
 
     componentWillReceiveProps(nextProps) {
@@ -21,15 +23,25 @@ class Table extends Component {
             APIList: nextProps.APIList
         })
     }
-    
+
+    // componentDidMount() {
+    //     $(document).ready(function () {
+    //         $('#example').DataTable({
+    //             "paging": false,
+    //             "ordering": false,
+    //             "info": false
+    //         });
+    //     });
+    // }
+
     render() {
-        if (this.state.rowList === [] ) {
+        if (this.state.rowList === []) {
             return null;
         } else {
             return (
                 this.state.rowList.map((item, i) => (
                     <tr key={i} className="1">
-                        <TableRow key={i} headList={this.state.headList} NOTdisplayed={this.state.NOTdisplayed} rowList={item} APIList={this.state.APIList}/>
+                        <TableRow key={i} headList={this.state.headList} NOTdisplayed={this.state.NOTdisplayed} rowList={item} APIList={this.state.APIList} />
                     </tr>
                 ))
             )

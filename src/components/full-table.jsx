@@ -25,7 +25,8 @@ class Table extends Component {
       APIList: [],
       apiObjectforMenu: {},
       first: true,
-      OLDData: {}
+      OLDData: {},
+      dataTableCalled: false
     };
 
     // this.socket = io("ec2-18-221-211-55.us-east-2.compute.amazonaws.com:5001");
@@ -36,8 +37,8 @@ class Table extends Component {
     // this.socketAWS.on("back", data => {
     //   console.log("FROM SERVER: ", data)
     // })
+    this.componentDidMount = this.componentDidMount.bind(this);
 
-    this.componentDidMount = this.componentDidMount.bind(this.socket);
     this.loadFileAsText = this.loadFileAsText.bind(this.socket);
 
     let that = this;
@@ -125,17 +126,22 @@ class Table extends Component {
     });
   }
   componentDidMount() {
-    this.emit("firstcall");
+    this.socket.emit("firstcall");
     setInterval(() => {
-      this.emit("firstcall");
+      this.socket.emit("firstcall");
     }, 20000);
-    $(document).ready(function () {
-      $('#example').DataTable({
-        "paging": false,
-        "ordering": false,
-        "info": false
-      });
-    });
+
+    // if ($.fn.dataTable.isDataTable('#example')) {
+    //   console.log('Destroying table')
+    //   $('#example').DataTable().destroy();
+    // } else {
+    //   $('#example').DataTable({
+    //     "paging": false,
+    //     "ordering": false,
+    //     "info": false,
+    //     "sort": false
+    //   });
+    // }
   }
 
   getConfigApiInfo(obj, APIList) {
@@ -581,6 +587,25 @@ class Table extends Component {
             </tbody>
           </table> */}
           <table id="example" className="display" style={{ width: "100%", display: "block", width: "95%", marginLeft: "auto", marginRight: "auto" }}>
+            <thead>
+              <TableNamesHolder
+                headList={this.state.headList}
+                NOTdisplayed={this.state.NOTdisplayed}
+                APIList={this.state.APIList}
+              />
+            </thead>
+            <tbody>
+              <BodyRowHolder
+                rowList={this.state.rowList}
+                headList={this.state.headList}
+                NOTdisplayed={this.state.NOTdisplayed}
+                handleClick={this.props.handleClick}
+                APIList={this.state.APIList}
+              />
+            </tbody>
+          </table>
+
+          {/* <table id="example" className="display" style={{ width: "100%", display: "block", width: "95%", marginLeft: "auto", marginRight: "auto" }}>
             <thead>
               <tr>
                 <th>Name</th>
@@ -1059,7 +1084,7 @@ class Table extends Component {
                 <th>Salary</th>
               </tr>
             </tfoot>
-          </table>
+          </table> */}
         </div>
       );
     }
