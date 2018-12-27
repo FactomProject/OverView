@@ -44,7 +44,7 @@ class App extends React.Component {
           <img src={logo} className="App-logo" alt="logo" />
           <h1 className="App-title">Information Display</h1>
         </header>
-        <div className="row">
+        <div className="row" style={{marginLeft: "0px"}}>
           <Table
             rowList={this.state.colVals}
             displayed={this.state.displayed}
