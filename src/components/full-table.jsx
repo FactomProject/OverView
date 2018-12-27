@@ -5,7 +5,6 @@ import BodyRowHolder from "./bodyrow-holder";
 import Menu from "./menu";
 import io from "socket.io-client";
 import $ from "jquery";
-import DataTable from "datatables";
 
 class Table extends Component {
   constructor(props) {
@@ -26,20 +25,11 @@ class Table extends Component {
       apiObjectforMenu: {},
       first: true,
       OLDData: {},
-      dataTableCalled: false
     };
 
-    // this.socket = io("ec2-18-221-211-55.us-east-2.compute.amazonaws.com:5001");
-    // this.socketAWS = io("ec2-18-221-211-55.us-east-2.compute.amazonaws.com:5001");
     this.socket = io("localhost:5001");
 
-    // this.socketAWS.emit("hello", "Hello, World");
-    // this.socketAWS.on("back", data => {
-    //   console.log("FROM SERVER: ", data)
-    // })
     this.componentDidMount = this.componentDidMount.bind(this);
-
-    this.loadFileAsText = this.loadFileAsText.bind(this.socket);
 
     let that = this;
     let newer_Obj = {};
@@ -63,25 +53,16 @@ class Table extends Component {
         newer_Obj[key][data.api] = {};
         newer_Obj[key][data.api] = data.data[key][data.api];
       }
-      // console.log(newer_Obj)
     });
 
     setInterval(function () {
-      // console.log("OLDData ",that.state.OLDData);
-      // console.log("NEW ", newer_Obj)
       let ObjToUse = {};
-      // let isEqual = _.isEqual(that.state.OLDData, newer_Obj);
-      // if (!isEqual) {
-      //   console.log("OLD ",that.state.OLDData)
-      //   console.log("NEW ", newer_Obj)
-      // }
       for (let url in newer_Obj) {
         ObjToUse[url] = {};
         if (Object.keys(that.state.OLDData).length !== 0) {
           // console.log(`NEW, ${url} `,newer_Obj[url]['current-minute'])
           // console.log(`OLD, ${url} `,that.state.OLDData[url]['current-minute'])
         }
-        // console.log(Object.keys(that.state.OLDData))
         for (let i = 0; i <= APIList.APIList.length - 1; i++) {
           ObjToUse[url][APIList.APIList[i].split("/")[0]] =
             newer_Obj[url][APIList.APIList[i].split("/")[0]];
@@ -149,11 +130,6 @@ class Table extends Component {
     }
 
     if (hugeHeadList.length > 0) {
-      // hugeHeadList.unshift("IP");
-
-      // console.log("hugearr: ", hugearr);
-      // console.log("hugeHeadList: ", hugeHeadList);
-      // console.log("newObj: ", newObj)
       this.setState({
         rowList: hugeArr,
         headList: hugeHeadList,
@@ -264,7 +240,6 @@ class Table extends Component {
       this.state.NOTdisplayedAPIs.push(item);
     } else {
       arrayHolder.map((data, i) => {
-        console.log("arrayHolder data: ", item, data)
         let inputs = document.getElementById(item + data);
         inputs.checked = true;
         if (this.state.NOTdisplayed.includes(data)) {
@@ -285,59 +260,12 @@ class Table extends Component {
     }
   }
 
-  loadFileAsText = () => {
-    var fileToLoad = document.getElementById("fileToLoad").files[0];
-
-    var fileReader = new FileReader();
-    let that = this;
-    fileReader.onload = function (fileLoadedEvent) {
-      var textFromFileLoaded = fileLoadedEvent.target.result;
-      let split = textFromFileLoaded.split("\n");
-
-      var regex = /\[(.*?)\]/;
-      let IPLIST = regex
-        .exec(split[0])[1]
-        .replace(/'/g, "")
-        .split(",");
-      let APILIST = regex
-        .exec(split[2])[1]
-        .replace(/'/g, "")
-        .split(",");
-
-      console.log(textFromFileLoaded);
-      console.log("IPLIST ", IPLIST);
-      console.log("APILIST ", APILIST);
-
-      for (let i = 0; i < IPLIST.length; i++) {
-        if (IPLIST[i].indexOf(":") === -1) {
-          IPLIST[i] = `${IPLIST[i]}:8088`;
-        }
-      }
-
-      that.setState({ APIList: APILIST });
-      that.socket.emit("firstcall", {
-        ListOfURLs: IPLIST,
-        ListOfAPIs: APILIST
-      });
-
-      setInterval(() => {
-        that.socket.emit("firstcall", {
-          ListOfURLs: IPLIST,
-          ListOfAPIs: APILIST
-        });
-      }, 25000);
-    };
-
-    fileReader.readAsText(fileToLoad, "UTF-8");
-  };
-
   render() {
     if (this.state.APIList[0] !== "") {
       return (
         <div className="column">
           <div
             className="nav"
-            // style={{ marginBottom: this.state.showMenu ? "11vh" : "5vh" }}
           >
             <div className="nav-pills">
               <div

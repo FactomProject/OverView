@@ -4,10 +4,6 @@ const express = require("express");
 const socket = require("socket.io");
 const axios = require("axios");
 const SocksClient = require("socks").SocksClient;
-// const SocksProxyAgent = require('socks-proxy-agent');
-// const url = require('url');
-const Http = require("http");
-var shttp = require("socks5-http-client");
 
 require("dotenv").config();
 
@@ -19,14 +15,6 @@ app.use(bodyParser.urlencoded({ extended: true }));
 server = app.listen(5001, function() {
   console.log("server is running on port 5001");
 });
-
-var http = require("http");
-
-var request = require("request");
-var Agent = require("socks5-http-client/lib/Agent");
-
-// let ipList = [];
-// let apisList = [];
 
 var regex = /\[(.*?)\]/;
 
@@ -65,40 +53,6 @@ io.on("connection", socket => {
     connections.splice(connections.indexOf(socket), 1);
   });
 
-  // apis = (url, endpoint, method, socketid) => {
-  //   console.log("url ", url, "endpoint ", endpoint, "method ", method)
-  //   request.post({
-  //     //  axios({
-  //       url: `http://${url}/${endpoint}`,
-  //       // agentClass: Agent,
-  //       // agentOptions: {
-  //       //     // socksHost: 'my-tor-proxy-host', // Defaults to 'localhost'.
-  //       //     socksPort: 8125 // Defaults to 1080.
-  //       // },
-  //       // headers: {
-  //       //     'Content-Type': 'application/json' 
-  //       // },
-  //       body: { jsonrpc: '2.0', id: 0, method: `${method}` },
-  //       json: true
-  //       }, function(err, res) {
-  //           if (err) {
-  //               let Obj = {};
-  //               Obj[url] = {};
-  //               Obj[url][method] = {};
-  //               io.to(socketid).emit("APIObject", { data: Obj, api: method });
-  //               console.log("Error ", err)
-  //           } else {
-  //               let Obj = {};
-  //               Obj[url] = {};
-  //               Obj[url][method] = res.body.result;
-
-  //               io.to(socketid).emit("APIObject", { data: Obj, api: method });
-  //           }
-  //       }
-  //     )
-  //   // })
-  // };
-
   apis = (url, endpoint, method, socketid) => {
    axios({
     method: "post",
@@ -112,7 +66,6 @@ io.on("connection", socket => {
     let Obj = {};
     Obj[url] = {};
     Obj[url][method] = res.data.result;
-    // console.log(res.data)
 
     io.to(socketid).emit("APIObject", { data: Obj, api: method });
    }).catch(err => {

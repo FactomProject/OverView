@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import '../App.css';
 import TableRow from './table-row';
-import $ from "jquery";
 
 
 class Table extends Component {

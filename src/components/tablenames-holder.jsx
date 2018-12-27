@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import '../App.css';
-import $ from "jquery";
 import TableNames from './table-names'
 
 class Table extends Component {

@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import '../App.css';
 import _ from "underscore";
-import $ from "jquery";
 
 class TableRow extends Component {
     constructor(props) {

@@ -26,7 +26,6 @@ class Menu extends Component {
       fullObj: nextProps.fullObj,
       propbablyshouldUseThis: nextProps.propbablyshouldUseThis
     });
-    // this.getMenus();
   }
 
   toggleDisplay(display) {
