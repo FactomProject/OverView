@@ -149,7 +149,7 @@ class SignIn extends Component {
       <div className="form-inline my-2 my-lg-0">
         <div
           id="auth-status"
-          style={{ display: "inline", paddingLeft: "25px" }}
+          style={{ display: "inline", paddingLeft: "4em" }}
         />
         <button
           id="sign-in-or-out-button"

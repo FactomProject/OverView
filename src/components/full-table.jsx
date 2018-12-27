@@ -337,7 +337,7 @@ class Table extends Component {
         <div className="column">
           <div
             className="nav"
-            style={{ marginBottom: this.state.showMenu ? "11vh" : "5vh" }}
+            // style={{ marginBottom: this.state.showMenu ? "11vh" : "5vh" }}
           >
             <div className="nav-pills">
               <div
@@ -495,7 +495,7 @@ class Table extends Component {
               </div>
             </div>
           </div>
-          <div className="table-scroll">
+          <div className="table-scroll" style={{marginLeft: "5em", width: "90vw"}}>
             <table>
               <thead>
                 <TableNamesHolder

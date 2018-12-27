@@ -19,7 +19,7 @@
 /* resets */
 
 body {
-  background-color: #202020;
+  background-color: #ffffff;
   font-size: 16px;
   margin: 0;
   padding: 0;
@@ -51,8 +51,8 @@ h1 small {
 } 
 table {
   margin-top: 5vh;
-  margin-left: 5em;
-  margin-right: 5em;
+  /* margin-left: 5em; */
+  /* margin-right: 5em; */
 }
 /* table thead {
   background-color: #28495f;
