@@ -20,7 +20,7 @@ class TableRow extends Component {
         this.setState({
             changed: false
         })
-        // console.log(nextProps.rowList, this.state.rowList)
+
         if (!_.isEqual(nextProps.rowList, this.state.rowList) && nextProps.rowList.length >= 1) {
             this.setState({
                 headList: nextProps.headList,
@@ -32,15 +32,6 @@ class TableRow extends Component {
         }
     }
 
-    // componentDidMount() {
-    //     $(document).ready(function () {
-    //         $('#example').DataTable({
-    //           "paging": false,
-    //           "ordering": false,
-    //           "info": false
-    //         });
-    //     });
-    // }
     render() {
         return this.state.APIList.map((api, i) => {
             return this.state.rowList.map((item, j) => (

@@ -18,7 +18,7 @@
 }
 /* resets */
 
-/* body {
+body {
   background-color: #202020;
   font-size: 16px;
   margin: 0;
@@ -48,13 +48,13 @@ h1 small {
   color: #939598;
   font-size: 16px;
   text-transform: none;
-} */
-/* table {
+} 
+table {
   margin-top: 5vh;
   margin-left: 5em;
   margin-right: 5em;
 }
-table thead {
+/* table thead {
   background-color: #28495f;
   border: none;
   text-transform: uppercase;
@@ -76,8 +76,8 @@ table tbody {
 }
 table tbody tr:nth-child(even) {
   background-color: #363636;
-}
-table tbody tr td {
+} */
+/* table tbody tr td {
   font-size: 14px;
   text-align: center;
 }

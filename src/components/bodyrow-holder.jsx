@@ -24,16 +24,6 @@ class Table extends Component {
         })
     }
 
-    // componentDidMount() {
-    //     $(document).ready(function () {
-    //         $('#example').DataTable({
-    //             "paging": false,
-    //             "ordering": false,
-    //             "info": false
-    //         });
-    //     });
-    // }
-
     render() {
         if (this.state.rowList === []) {
             return null;

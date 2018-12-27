@@ -24,16 +24,6 @@ class TableNames extends Component {
     }
   }
 
-  // componentDidMount() {
-  //   $(document).ready(function () {
-  //     $('#example').DataTable({
-  //       "paging": false,
-  //       "ordering": false,
-  //       "info": false
-  //     });
-  //   });
-  // }
-
   render() {
     return this.state.APIList.map((item, i) => {
       return this.state.headList.map(
