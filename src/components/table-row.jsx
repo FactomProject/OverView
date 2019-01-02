@@ -10,7 +10,8 @@ class TableRow extends Component {
             rowList: [],
             NOTdisplayed: [],
             APIList: [],
-            changed: false
+            changed: false,
+            count: 0
         }
 
     }
@@ -19,8 +20,18 @@ class TableRow extends Component {
         this.setState({
             changed: false
         })
-
-        if (!_.isEqual(nextProps.rowList, this.state.rowList) && nextProps.rowList.length >= 1) {
+        
+        if (this.state.rowList.length === nextProps.rowList.length) {
+            if (!_.isEqual(nextProps.rowList, this.state.rowList) && nextProps.rowList.length >= 1) {
+                this.setState({
+                    headList: nextProps.headList,
+                    rowList: nextProps.rowList,
+                    NOTdisplayed: nextProps.NOTdisplayed,
+                    APIList: nextProps.APIList,
+                    changed: true
+                })
+            }
+        } else if(this.state.count === 0) {
             this.setState({
                 headList: nextProps.headList,
                 rowList: nextProps.rowList,
@@ -28,21 +39,35 @@ class TableRow extends Component {
                 APIList: nextProps.APIList,
                 changed: true
             })
+        } else {
+            this.setState({
+                headList: nextProps.headList,
+                NOTdisplayed: nextProps.NOTdisplayed,
+                APIList: nextProps.APIList,
+                changed: true
+            })
         }
+        this.setState({
+            count: this.state.count+1
+        })
     }
 
     render() {
-        return this.state.APIList.map((api, i) => {
-            return this.state.rowList.map((item, j) => (
-                item.split('--')[1] === "URL" && i === 0 ? (
-                    <th key={j.toString()} className={this.state.headList[j]} style={{ textAlign: 'center' }}>{item.split('--')[0].split(':')[0]}</th>
-                ) : (
-                        item.split('--')[1] === api.split('/')[0] ? (
-                            <th key={j.toString()} className={this.state.headList[j]} style={{ textAlign: 'center', animation: this.state.changed ? 'highlight 1s' : null }}>{item.split('--')[0]}</th>
-                        ) : (null)
-                    )
-            ))
-        })
+        if (this.state.rowList.length > 0) {
+            return this.state.APIList.map((api, i) => {
+                return this.state.rowList.map((item, j) => (
+                    item.split('--')[1] === "URL" && i === 0 ? (
+                        <th key={j.toString()} className={this.state.headList[j]} style={{ textAlign: 'center' }}>{item.split('--')[0].split(':')[0]}</th>
+                    ) : (
+                            item.split('--')[1] === api.split('/')[0] ? (
+                                <th key={j.toString()} className={this.state.headList[j]} style={{ textAlign: 'center', animation: this.state.changed ? 'highlight 1s' : null }}>{item.split('--')[0]}</th>
+                            ) : (null)
+                        )
+                ))
+            })
+        } else {
+            return null;
+        }
     }
 
 }
