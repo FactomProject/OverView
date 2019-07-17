@@ -19,32 +19,48 @@ class TableRow extends Component {
         if (state.headList.length === 0 || props.headList.length > state.headList.length) {
             return { headList: props.headList,NOTdisplayedAPIs: props.NOTdisplayedAPIs, displayed: props.displayed }
         }
-
+        
         if (props.rowList.length < state.headList.length) {
-            let newRowList = [];
-            if (props.rowList.length > 1) {
-                for (let h = 0; h < state.headList.length; h++) {
-                    if (h === 0) {
-                        newRowList.push(props.rowList[h]);
-                    } else {
-                        let headListSplit = state.headList[h].split('--');
-                        for (let r = 1; r < props.rowList.length; r++) {
-                            let rowListSplit = props.rowList[r].split('--');
-                            if (`${rowListSplit[1]}--${rowListSplit[2]}` === `${headListSplit[0]}--${headListSplit[1]}`) {
-                                newRowList.push(props.rowList[r])
+            if (props.rowList.length === 1) {
+                let split = props.rowList[0].split('--');
+                if (split[1] === "URL") {
+                    return { rowList: props.rowList, APIList: props.APIList };
+                }
+            } else {
+                let newRowList = [];
+                if (props.rowList.length > 1) {
+                    for (let h = 0; h < state.headList.length; h++) {
+                        if (h === 0) {
+                            newRowList.push(props.rowList[h]);
+                        } else {
+                            let headListSplit = state.headList[h].split('--');
+                            for (let r = 1; r < props.rowList.length; r++) {
+                                let rowListSplit = props.rowList[r].split('--');
+                                if (`${rowListSplit[1]}--${rowListSplit[2]}` === `${headListSplit[0]}--${headListSplit[1]}`) {
+                                    newRowList.push(props.rowList[r])
+                                }
                             }
-                        }
-                        if (newRowList[h] === undefined || !newRowList[h].includes(`${headListSplit[0]}--${headListSplit[1]}`)){
-                            newRowList.push(`""--${headListSplit[0]}--${headListSplit[1]}`)
+                            if (newRowList[h] === undefined || !newRowList[h].includes(`${headListSplit[0]}--${headListSplit[1]}`)){
+                                newRowList.push(`""--${headListSplit[0]}--${headListSplit[1]}`)
+                            }
                         }
                     }
                 }
+            
+                if (newRowList.length > 1) {
+                    return { rowList: newRowList, APIList: props.APIList, NOTdisplayedAPIs: props.NOTdisplayedAPIs }
+                }
             }
-            if (newRowList.length > 1) {
-                return { rowList: newRowList, APIList: props.APIList, NOTdisplayedAPIs: props.NOTdisplayedAPIs }
+        } 
+        else if (!_.isEqual(props.rowList, state.rowList)) {
+            if (props.rowList.length === 1) {
+                let split = props.rowList[0].split('--');
+                if (split[1] === "URL") {
+                    return { rowList: props.rowList, APIList: props.APIList };
+                }
+            } else {
+                return { rowList: props.rowList, APIList: props.APIList, NOTdisplayedAPIs: props.NOTdisplayedAPIs}
             }
-        } else if (!_.isEqual(props.rowList, state.rowList)) {
-            return { rowList: props.rowList, APIList: props.APIList, NOTdisplayedAPIs: props.NOTdisplayedAPIs}
         } 
         if (props.displayed !== state.displayed) { return { displayed: props.displayed }}
 
@@ -58,25 +74,30 @@ class TableRow extends Component {
         let chooseNOTdisplayedAPIVar = (displaysLocal !== null && displaysLocal.NOTdisplayedAPIs !== null) ? displaysLocal.NOTdisplayedAPIs : NOTdisplayedAPIs;
         
         if (APIList.length) {
-            return rowList.map((item,j) => (
-                j !== 0 && chooseNOTdisplayedAPIVar !== undefined ? (
-                    chooseNOTdisplayedAPIVar.includes(item.split('--')[2]) ? (
-                        chooseDisplayVar.includes(`${item.split('--')[1]}--${item.split('--')[2]}`) ? (
-                            <th key={ `th-${item}-j` } className={ headList[j] } style={{ textAlign: 'center', animation: changed ? 'highlight 1s' : null }}>{ item.split('--')[0] }</th>
+            if (rowList.length === 1) {
+                return ( <th key={ `th-${rowList[0]}-${0}` } className={ headList[0] } style={{ textAlign: 'center' }}>{ rowList[0].split('--')[0].split(':')[0] }</th>)
+            }
+            else {
+                return rowList.map((item,j) => ( 
+                    j !== 0 && chooseNOTdisplayedAPIVar !== undefined ? (
+                        chooseNOTdisplayedAPIVar.includes(item.split('--')[2]) ? (
+                            chooseDisplayVar.includes(`${item.split('--')[1]}--${item.split('--')[2]}`) ? (
+                                <th key={ `th-${item}-j` } className={ headList[j] } style={{ textAlign: 'center', animation: changed ? 'highlight 1s' : null }}>{ item.split('--')[0] }</th>
+                            ) : (
+                                null
+                            )
                         ) : (
-                            null
+                            chooseDisplayVar.includes(`${item.split('--')[1]}--${item.split('--')[2]}`) ? (
+                                <th key={ `th-${item}-${j}` } className={ headList[j] } style={{ textAlign: 'center', animation: changed ? 'highlight 1s' : null }}>{ item.split('--')[0] }</th>
+                            ) : (
+                                <th key={ `th-${item}-${j}` } className={ headList[j] } style={{ textAlign: 'center', animation: changed ? 'highlight 1s' : null, display: "none" }}>{ item.split('--')[0] }</th>                            
+                            )
                         )
                     ) : (
-                        chooseDisplayVar.includes(`${item.split('--')[1]}--${item.split('--')[2]}`) ? (
-                            <th key={ `th-${item}-${j}` } className={ headList[j] } style={{ textAlign: 'center', animation: changed ? 'highlight 1s' : null }}>{ item.split('--')[0] }</th>
-                        ) : (
-                            <th key={ `th-${item}-${j}` } className={ headList[j] } style={{ textAlign: 'center', animation: changed ? 'highlight 1s' : null, display: "none" }}>{ item.split('--')[0] }</th>                            
-                        )
+                        <th key={ `th-${item}-${j}` } className={ headList[j] } style={{ textAlign: 'center' }}>{ item.split('--')[0].split(':')[0] }</th>
                     )
-                ) : (
-                    <th key={ `th-${item}-${j}` } className={ headList[j] } style={{ textAlign: 'center' }}>{ item.split('--')[0].split(':')[0] }</th>
-                )
-            ))
+                ))
+            }
         } else {
             return null;
         }
