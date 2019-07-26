@@ -62,6 +62,7 @@ class Table extends Component {
     }.bind(this));
 
     this.socket.on('APIObject', function (data) {
+      // console.log("APIObject: ", data)
       for (let key in data.data) {
         if (newer_Obj.hasOwnProperty(data.api)) {
           newer_Obj[key][data.api] = data.data[key][data.api];
@@ -69,6 +70,7 @@ class Table extends Component {
           newer_Obj[key][data.api] = data.data[key][data.api];
         }
       }
+      // console.log("newer_Obj: ", newer_Obj)
     });
 
     setInterval(function () {
@@ -109,6 +111,7 @@ class Table extends Component {
   }
 
   getConfigApiInfo(obj, APIList) {
+    // console.log("Object to Use: ", obj)
     let hugeArr = [];
     let hugeHeadList = [];
     let displayed = [];
@@ -479,16 +482,7 @@ class Table extends Component {
                         {item}
                         <div className='btn-group dropright downdeep' onMouseEnter={() => this.toggleAPIMenuDisplay(true, item)} onMouseLeave={() => this.toggleAPIMenuDisplay(false, item)} >
                           <div role='button' className='nav-link btn dropdown-toggle' data-toggle='dropdown' aria-haspopup='true' aria-expanded='true' name='menudisplay'></div>
-                          <div className={`dropdown-menu apikeys ${item}`}
-                            style={{
-                              display: showMenu2[item]
-                                ? 'block'
-                                : 'none',
-                              position: 'absolute',
-                              marginLeft: '0px',
-                              left: "95%"
-                            }}
-                          >
+                          <div className={`dropdown-menu apikeys ${item}`} style={{display: showMenu2[item] ? 'block' : 'none', position: 'absolute', marginLeft: '0px', left: "95%"}}>
                             <div className='dropdown-item'>
                               <a className='switch tiny' key={`Menu_item_${i}-${item}`}>
                                 Full API
@@ -524,15 +518,7 @@ class Table extends Component {
                           {item}
                           <div className='btn-group dropright downdeep' onMouseEnter={() => this.toggleAPIMenuDisplay(true, item)} onMouseLeave={() => this.toggleAPIMenuDisplay(false, item)} >
                             <div role='button' className='nav-link btn dropdown-toggle' data-toggle='dropdown' aria-haspopup='true' aria-expanded='true'></div>
-                            <div className={`dropdown-menu apikeys ${item}`}
-                              style={{
-                                display: showMenu2[item]
-                                  ? 'block'
-                                  : 'none',
-                                position: 'absolute',
-                                left: "95%"
-                              }}
-                            >
+                            <div className={`dropdown-menu apikeys ${item}`} style={{display: showMenu2[item] ? 'block' : 'none',  position: 'absolute', left: "95%"}}>
                               <div className='dropdown-item'>
                                 <a className='switch tiny' key={`Menu_item_${i}-${item}`}>
                                   Full API
