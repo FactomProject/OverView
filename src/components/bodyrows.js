@@ -22,15 +22,18 @@ class TableRow extends Component {
         
         if (props.rowList.length === 1 && state.rowList.length === 0) {
             let oldRowList = JSON.parse(localStorage.getItem(`${props.rowList[0].split('--')[0]}`));
-            localStorage.setItem(`${props.rowList[0].split('--')[0]}--off`, true)
-            return { rowList: oldRowList, APIList: props.APIList }
+            if (oldRowList !== null) {
+                localStorage.setItem(`${props.rowList[0].split('--')[0]}--off`, true)
+                return { rowList: oldRowList, APIList: props.APIList }
+            }
         } else if (props.rowList.length < state.headList.length) {
             if (props.rowList.length === 1) {
                 let oldRowList = JSON.parse(localStorage.getItem(`${props.rowList[0].split('--')[0]}`));
-                if (oldRowList[0].split('--')[1] === "URL") {
-                    localStorage.setItem(`${props.rowList[0].split('--')[0]}--off`, true)
-
-                    return { rowList: oldRowList, APIList: props.APIList };
+                if (oldRowList !== null) {
+                    if (oldRowList[0].split('--')[1] === "URL") {
+                        localStorage.setItem(`${props.rowList[0].split('--')[0]}--off`, true)
+                        return { rowList: oldRowList, APIList: props.APIList };
+                    }
                 }
             } else {
                 let newRowList = [];

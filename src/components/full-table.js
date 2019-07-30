@@ -62,7 +62,6 @@ class Table extends Component {
     }.bind(this));
 
     this.socket.on('APIObject', function (data) {
-      // console.log("APIObject: ", data)
       for (let key in data.data) {
         if (newer_Obj.hasOwnProperty(data.api)) {
           newer_Obj[key][data.api] = data.data[key][data.api];
@@ -70,7 +69,6 @@ class Table extends Component {
           newer_Obj[key][data.api] = data.data[key][data.api];
         }
       }
-      // console.log("newer_Obj: ", newer_Obj)
     });
 
     setInterval(function () {
@@ -96,22 +94,14 @@ class Table extends Component {
     }.bind(this), 1000)
   }
 
-  static getDerivedStateFromProps(nextProps, prevState) {
-    
-    return null;
-  }
-
   componentDidMount() {
     this.socket.emit('firstcall');
     setInterval(() => {
       this.socket.emit('firstcall');
     }, 6000);
-
-    // localStorage.clear()
   }
 
   getConfigApiInfo(obj, APIList) {
-    // console.log("Object to Use: ", obj)
     let hugeArr = [];
     let hugeHeadList = [];
     let displayed = [];
