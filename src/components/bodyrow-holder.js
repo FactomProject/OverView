@@ -35,11 +35,17 @@ class Table extends Component {
             return (
                 rowList.map((item, i) => (
                     i % 2 === 0 ? (
-                        <tr key={ `tr-${item}-${i}` } className='1' style={{ backgroundColor: theme === 'dark' ? '#363636' : '' }}>
+                        <tr key={ `tr-${item}-${i}` } className='1' style={{ 
+                            backgroundColor: JSON.parse(localStorage.getItem(`${item[0].split('--')[0]}--off`)) ? "red" : (theme === 'dark' ? '#363636' : ''),
+                            color: JSON.parse(localStorage.getItem(`${item[0].split('--')[0]}--off`)) ? "#cccccc" : null
+                        }}>
                             <TableRow headList={ headList } NOTdisplayed={ NOTdisplayed } rowList={ item } APIList={ APIList } NOTdisplayedAPIs={ NOTdisplayedAPIs } displayed={ this.props.displayed } />
                         </tr>
                     ) : (
-                        <tr key={ `tr-${item}-${i}` } className='1' style={{ backgroundColor: theme === 'dark' ? '#2f2f2f' : '' }}>
+                        <tr key={ `tr-${item}-${i}` } className='1' style={{ 
+                            backgroundColor: JSON.parse(localStorage.getItem(`${item[0].split('--')[0]}--off`)) ? "red" : (theme === 'dark' ? '#2f2f2f' : ''),
+                            color: JSON.parse(localStorage.getItem(`${item[0].split('--')[0]}--off`)) ? "#cccccc" : null
+                        }}>
                             <TableRow headList={ headList } NOTdisplayed={ NOTdisplayed } rowList={ item } APIList={ APIList } NOTdisplayedAPIs={ NOTdisplayedAPIs } displayed={ this.props.displayed } />
                         </tr>
                     )
@@ -48,6 +54,5 @@ class Table extends Component {
         }
     }
 }
-
 
 export default Table

@@ -65,7 +65,7 @@ class Menu extends Component {
             key.split('--')[1] === item ? (
               chooseDisplayedVar.includes(key) ? (
               <div className='dropdown-item' href='#' key={ `Menu_key_${i}` }>
-                  {key.split('--')[0]}
+                  { key.split('--')[0] }
                   <a className='switch tiny' key={ `Menu_key_${i}` }>
                     <input
                       className='switch-input'
