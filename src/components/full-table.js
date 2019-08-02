@@ -94,18 +94,11 @@ class Table extends Component {
     }.bind(this), 1000)
   }
 
-  static getDerivedStateFromProps(nextProps, prevState) {
-    
-    return null;
-  }
-
   componentDidMount() {
     this.socket.emit('firstcall');
     setInterval(() => {
       this.socket.emit('firstcall');
     }, 6000);
-
-    // localStorage.clear()
   }
 
   getConfigApiInfo(obj, APIList) {
@@ -479,16 +472,7 @@ class Table extends Component {
                         {item}
                         <div className='btn-group dropright downdeep' onMouseEnter={() => this.toggleAPIMenuDisplay(true, item)} onMouseLeave={() => this.toggleAPIMenuDisplay(false, item)} >
                           <div role='button' className='nav-link btn dropdown-toggle' data-toggle='dropdown' aria-haspopup='true' aria-expanded='true' name='menudisplay'></div>
-                          <div className={`dropdown-menu apikeys ${item}`}
-                            style={{
-                              display: showMenu2[item]
-                                ? 'block'
-                                : 'none',
-                              position: 'absolute',
-                              marginLeft: '0px',
-                              left: "95%"
-                            }}
-                          >
+                          <div className={`dropdown-menu apikeys ${item}`} style={{display: showMenu2[item] ? 'block' : 'none', position: 'absolute', marginLeft: '0px', left: "95%"}}>
                             <div className='dropdown-item'>
                               <a className='switch tiny' key={`Menu_item_${i}-${item}`}>
                                 Full API
@@ -524,15 +508,7 @@ class Table extends Component {
                           {item}
                           <div className='btn-group dropright downdeep' onMouseEnter={() => this.toggleAPIMenuDisplay(true, item)} onMouseLeave={() => this.toggleAPIMenuDisplay(false, item)} >
                             <div role='button' className='nav-link btn dropdown-toggle' data-toggle='dropdown' aria-haspopup='true' aria-expanded='true'></div>
-                            <div className={`dropdown-menu apikeys ${item}`}
-                              style={{
-                                display: showMenu2[item]
-                                  ? 'block'
-                                  : 'none',
-                                position: 'absolute',
-                                left: "95%"
-                              }}
-                            >
+                            <div className={`dropdown-menu apikeys ${item}`} style={{display: showMenu2[item] ? 'block' : 'none',  position: 'absolute', left: "95%"}}>
                               <div className='dropdown-item'>
                                 <a className='switch tiny' key={`Menu_item_${i}-${item}`}>
                                   Full API
